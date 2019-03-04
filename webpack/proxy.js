@@ -3,8 +3,20 @@
 const parcelsRegex = /\/api\/parcels$/;
 const parcels = require('./mock-data/parcels.json');
 
+const singleParcelRegex = /\/api\/parcels\/([^\s/]+)$/;
+const singleParcel = (url) => {
+    const parcelsList = require('./mock-data/parcels.json');
+    const match = singleParcelRegex.exec(url);
+    if (match) {
+        const parcelId = match[1];
+        const parcel = parcelsList.find(item => item.id === parcelId);
+        return parcel || null;
+    }
+    return null;
+};
+
 const packagesRegex = /\/api\/parcels\/(\S+)\/packages$/;
-const packages = (url) => {
+const singlePackage = (url) => {
     const packagesList = require('./mock-data/packages.json');
     const match = packagesRegex.exec(url);
     if (match) {
@@ -24,8 +36,11 @@ module.exports = {
                 case testUrl(parcelsRegex):
                     res.json(parcels);
                     return true;
+                case testUrl(singleParcelRegex):
+                    res.json(singleParcel(req.url));
+                    return true;
                 case testUrl(packagesRegex):
-                    res.json(packages(req.url));
+                    res.json(singlePackage(req.url));
                     return true;
                 default:
                     return '/index.html';

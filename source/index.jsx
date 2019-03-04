@@ -12,6 +12,7 @@ import store from './store';
 import AppView from './views/components/AppView';
 import MainView from './views/components/MainView';
 import ParcelsView from './views/components/ParcelsView';
+import SingleParcelView from './views/components/SingleParcelView';
 
 PromiseBluebird.config({
     warnings: false,
@@ -24,6 +25,7 @@ render(
             <Route path='/' component={AppView}>
                 <IndexRoute component={MainView} />
                 <Route path='parcels' component={ParcelsView} />
+                <Route path='parcels/:parcelId' component={SingleParcelView} />
             </Route>
         </Router>
     </Provider>,
