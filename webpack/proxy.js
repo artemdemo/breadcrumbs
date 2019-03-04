@@ -27,6 +27,21 @@ const singlePackage = (url) => {
     return null;
 };
 
+const itemsRegex = /\/api\/items$/;
+const items = require('./mock-data/items.json');
+
+const singleItemRegex = /\/api\/items\/([^\s/]+)$/;
+const singleItem = (url) => {
+    const itemsList = require('./mock-data/items.json');
+    const match = singleItemRegex.exec(url);
+    if (match) {
+        const itemId = match[1];
+        const item = itemsList.find(item => item.id === itemId);
+        return item || null;
+    }
+    return null;
+};
+
 module.exports = {
     '/api': {
         bypass: (req, res) => {
@@ -41,6 +56,12 @@ module.exports = {
                     return true;
                 case testUrl(packagesRegex):
                     res.json(singlePackage(req.url));
+                    return true;
+                case testUrl(itemsRegex):
+                    res.json(items);
+                    return true;
+                case testUrl(singleItemRegex):
+                    res.json(singleItem(req.url));
                     return true;
                 default:
                     return '/index.html';
