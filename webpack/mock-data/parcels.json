@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "parcel #01",
+        "packages-list": "a1"
+    },
+    {
+        "id": 2,
+        "name": "parcel #02",
+        "packages-list": "a2"
+    }
+]
