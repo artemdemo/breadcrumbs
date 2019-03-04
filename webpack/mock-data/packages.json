@@ -1,0 +1,29 @@
+[
+    {
+        "id": "a1",
+        "name": "package #a1",
+        "items": [
+            {"id": "i1", "color": "red"},
+            {"id": "i2", "color": "red"},
+            {"id": "i3", "color": "blue"}
+        ]
+    },
+    {
+        "id": "a2",
+        "name": "package #a2",
+        "items": [
+            {"id": "i4", "color": "red"},
+            {"id": "i5", "color": "red"},
+            {"id": "i6", "color": "blue"}
+        ]
+    },
+    {
+        "id": "a3",
+        "name": "package #a3",
+        "items": [
+            {"id": "i7", "color": "red"},
+            {"id": "i8", "color": "red"},
+            {"id": "i9", "color": "blue"}
+        ]
+    }
+]
