@@ -15,10 +15,13 @@ const singleParcel = (url) => {
     return null;
 };
 
-const packagesRegex = /\/api\/parcels\/(\S+)\/packages$/;
+const packagesRegex = /\/api\/packages$/;
+const packages = require('./mock-data/packages.json');
+
+const singlePackageRegex = /\/api\/packages\/([^\s/]+)$/;
 const singlePackage = (url) => {
     const packagesList = require('./mock-data/packages.json');
-    const match = packagesRegex.exec(url);
+    const match = singlePackageRegex.exec(url);
     if (match) {
         const packageId = match[1];
         const pkg = packagesList.find(item => item.id === packageId);
@@ -55,6 +58,9 @@ module.exports = {
                     res.json(singleParcel(req.url));
                     return true;
                 case testUrl(packagesRegex):
+                    res.json(packages);
+                    return true;
+                case testUrl(singlePackageRegex):
                     res.json(singlePackage(req.url));
                     return true;
                 case testUrl(itemsRegex):

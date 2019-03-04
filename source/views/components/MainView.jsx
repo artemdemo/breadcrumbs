@@ -6,7 +6,7 @@ const MainView = () => {
         <React.Fragment>
             <Icon name='globe' />
             &nbsp;
-            Main View
+            Home (Main) View
         </React.Fragment>
     );
 };

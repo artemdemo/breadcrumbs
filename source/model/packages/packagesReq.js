@@ -6,3 +6,10 @@ export const loadPackages = (parcelId) => {
         .promise()
         .then(result => result.body);
 };
+
+export const loadPackage = (packageId) => {
+    return request
+        .get(`/api/packages/${packageId}`)
+        .promise()
+        .then(result => result.body);
+};
