@@ -1,15 +1,15 @@
 import request from 'superagent-bluebird-promise';
 
-export const loadPackages = () => {
+export const loadItems = () => {
     return request
-        .get('/api/packages')
+        .get('/api/items')
         .promise()
         .then(result => result.body);
 };
 
-export const loadPackage = (packageId) => {
+export const loadItem = (itemId) => {
     return request
-        .get(`/api/packages/${packageId}`)
+        .get(`/api/items/${itemId}`)
         .promise()
         .then(result => result.body);
 };
