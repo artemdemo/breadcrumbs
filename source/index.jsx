@@ -17,6 +17,7 @@ import PackagesView from './views/components/PackagesView';
 import SinglePackageView from './views/components/SinglePackageView';
 import ItemsView from './views/components/ItemsView';
 import SingleItemView from './views/components/SingleItemView';
+import SecondaryView from './views/components/SecondaryView';
 
 PromiseBluebird.config({
     warnings: false,
@@ -34,6 +35,7 @@ render(
                 <Route path='packages/:packageId' component={SinglePackageView} />
                 <Route path='items' component={ItemsView} />
                 <Route path='items/:itemId' component={SingleItemView} />
+                <Route path='secondary' component={SecondaryView} />
             </Route>
         </Router>
     </Provider>,

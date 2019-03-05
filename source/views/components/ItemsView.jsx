@@ -1,7 +1,8 @@
 import React from 'react';
+import BaseView from './BaseView';
 import { loadItems } from '../../model/items/itemsReq';
 
-class ItemsView extends React.PureComponent {
+class ItemsView extends BaseView {
     constructor(props) {
         super(props);
 

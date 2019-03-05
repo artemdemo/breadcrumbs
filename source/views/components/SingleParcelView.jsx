@@ -1,7 +1,8 @@
 import React from 'react';
+import BaseView from './BaseView';
 import { loadParcel } from '../../model/parcels/parcelsReq';
 
-class SingleParcelView extends React.PureComponent {
+class SingleParcelView extends BaseView {
     constructor(props) {
         super(props);
 
