@@ -9,9 +9,11 @@ class ParcelsView extends BaseView {
 
         this.state = {
             parcels: [],
+            selectedValue: '',
         };
 
         this.statuses = [
+            {value: '', label: 'All'},
             {value: 'delivered', label: 'Delivered'},
             {value: 'ready', label: 'Ready'},
             {value: 'draft', label: 'Draft'},
@@ -23,11 +25,25 @@ class ParcelsView extends BaseView {
             .then(parcels => this.setState({ parcels }));
     }
 
+    onSelectStatus(status) {
+        this.setState({
+            selectedValue: status.value,
+        });
+    }
+
     render() {
+        const parcels = this.state.selectedValue === '' ?
+            this.state.parcels :
+            this.state.parcels.filter((item) => {
+                return item.status === this.state.selectedValue;
+            });
         return (
             <React.Fragment>
                 <p>
-                    <Select data={this.statuses} />
+                    <Select
+                        onChange={this.onSelectStatus.bind(this)}
+                        data={this.statuses}
+                    />
                 </p>
                 <table className='table'>
                     <thead>
@@ -38,7 +54,7 @@ class ParcelsView extends BaseView {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.parcels.map(parcel => (
+                        {parcels.map(parcel => (
                             <tr key={`parcel-${parcel.id}`}>
                                 <td>{parcel.id}</td>
                                 <td>{parcel.name}</td>

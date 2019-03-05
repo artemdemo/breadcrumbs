@@ -9,9 +9,11 @@ class ItemsView extends BaseView {
 
         this.state = {
             items: [],
+            selectedValue: '',
         };
 
         this.colors = [
+            {value: '', label: 'All'},
             {value: 'red', label: 'Red'},
             {value: 'blue', label: 'Blue'},
         ];
@@ -22,11 +24,26 @@ class ItemsView extends BaseView {
             .then(items => this.setState({ items }));
     }
 
+    onSelectStatus(status) {
+        this.setState({
+            selectedValue: status.value,
+        });
+    }
+
     render() {
+        const items = this.state.selectedValue === '' ?
+            this.state.items :
+            this.state.items.filter((item) => {
+                return item.color === this.state.selectedValue;
+            });
+
         return (
             <React.Fragment>
                 <p>
-                    <Select data={this.colors} />
+                    <Select
+                        onChange={this.onSelectStatus.bind(this)}
+                        data={this.colors}
+                    />
                 </p>
 
                 <table className='table'>
@@ -37,7 +54,7 @@ class ItemsView extends BaseView {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.items.map(item => (
+                        {items.map(item => (
                             <tr key={`item-${item.id}`}>
                                 <td>{item.id}</td>
                                 <td>{item.color}</td>
