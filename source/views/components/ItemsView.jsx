@@ -24,7 +24,7 @@ class ItemsView extends BaseView {
             .then(items => this.setState({ items }));
     }
 
-    onSelectStatus(status) {
+    onSelectStatus = (status) => {
         this.setState({
             selectedValue: status.value,
         });
@@ -41,7 +41,7 @@ class ItemsView extends BaseView {
             <React.Fragment>
                 <p>
                     <Select
-                        onChange={this.onSelectStatus.bind(this)}
+                        onChange={this.onSelectStatus}
                         data={this.colors}
                     />
                 </p>

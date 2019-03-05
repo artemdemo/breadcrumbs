@@ -25,7 +25,8 @@ class ParcelsView extends BaseView {
             .then(parcels => this.setState({ parcels }));
     }
 
-    onSelectStatus(status) {
+    onSelectStatus = (status) => {
+        console.log(111);
         this.setState({
             selectedValue: status.value,
         });
@@ -41,7 +42,7 @@ class ParcelsView extends BaseView {
             <React.Fragment>
                 <p>
                     <Select
-                        onChange={this.onSelectStatus.bind(this)}
+                        onChange={this.onSelectStatus}
                         data={this.statuses}
                     />
                 </p>
