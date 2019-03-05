@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView';
+import Select from '../../components/Select/Select';
 import { loadItems } from '../../model/items/itemsReq';
 
 class ItemsView extends BaseView {
@@ -9,6 +10,11 @@ class ItemsView extends BaseView {
         this.state = {
             items: [],
         };
+
+        this.colors = [
+            {value: 'red', label: 'Red'},
+            {value: 'blue', label: 'Blue'},
+        ];
     }
 
     componentDidMount() {
@@ -19,6 +25,10 @@ class ItemsView extends BaseView {
     render() {
         return (
             <React.Fragment>
+                <p>
+                    <Select data={this.colors} />
+                </p>
+
                 <table className='table'>
                     <thead>
                         <tr>

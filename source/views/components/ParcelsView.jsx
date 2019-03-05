@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView';
+import Select from '../../components/Select/Select';
 import { loadParcels } from '../../model/parcels/parcelsReq';
 
 class ParcelsView extends BaseView {
@@ -9,6 +10,12 @@ class ParcelsView extends BaseView {
         this.state = {
             parcels: [],
         };
+
+        this.statuses = [
+            {value: 'delivered', label: 'Delivered'},
+            {value: 'ready', label: 'Ready'},
+            {value: 'draft', label: 'Draft'},
+        ];
     }
 
     componentDidMount() {
@@ -19,6 +26,9 @@ class ParcelsView extends BaseView {
     render() {
         return (
             <React.Fragment>
+                <p>
+                    <Select data={this.statuses} />
+                </p>
                 <table className='table'>
                     <thead>
                         <tr>
