@@ -19,12 +19,22 @@ class ItemsView extends BaseView {
     render() {
         return (
             <React.Fragment>
-                {this.state.items.map(parcel => (
-                    <div key={`items-${parcel.id}`}>
-                        {parcel.id}
-                        {parcel.color}
-                    </div>
-                ))}
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>ID</th>
+                            <th scope='col'>Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.items.map(item => (
+                            <tr key={`item-${item.id}`}>
+                                <td>{item.id}</td>
+                                <td>{item.color}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </React.Fragment>
         );
     }

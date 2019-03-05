@@ -2,19 +2,25 @@
     {
         "id": "1",
         "name": "parcel #01",
-        "packages-list": "a1",
+        "packagesList": {
+            "id": "a1"
+        },
         "status": "delivered"
     },
     {
         "id": "2",
         "name": "parcel #02",
-        "packages-list": "a2",
+        "packagesList": {
+            "id": "a2"
+        },
         "status": "ready"
     },
     {
         "id": "3",
         "name": "parcel #03",
-        "packages-list": "a3",
+        "packagesList": {
+            "id": "a3"
+        },
         "status": "draft"
     }
 ]

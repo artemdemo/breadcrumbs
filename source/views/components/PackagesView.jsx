@@ -19,12 +19,24 @@ class PackagesView extends BaseView {
     render() {
         return (
             <React.Fragment>
-                {this.state.packages.map(parcel => (
-                    <div key={`packages-${parcel.id}`}>
-                        {parcel.id}
-                        {parcel.name}
-                    </div>
-                ))}
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>ID</th>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Num. of items</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.packages.map(pkg => (
+                            <tr key={`package-${pkg.id}`}>
+                                <td>{pkg.id}</td>
+                                <td>{pkg.name}</td>
+                                <td>{pkg.items.length}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </React.Fragment>
         );
     }
