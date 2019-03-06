@@ -28,7 +28,7 @@ class ItemsView extends BaseView {
         this.setState({
             selectedValue: status.value,
         });
-    }
+    };
 
     render() {
         const items = this.state.selectedValue === '' ?

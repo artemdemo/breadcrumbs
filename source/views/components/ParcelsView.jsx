@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView';
 import Select from '../../components/Select/Select';
+import history from '../../history';
 import { loadParcels } from '../../model/parcels/parcelsReq';
 
 class ParcelsView extends BaseView {
@@ -18,19 +19,36 @@ class ParcelsView extends BaseView {
             {value: 'ready', label: 'Ready'},
             {value: 'draft', label: 'Draft'},
         ];
+
+        this.historyUnlisten = null;
     }
 
     componentDidMount() {
+        this.updateStatus(history.getCurrentLocation());
+        this.historyUnlisten = history.listen(this.updateStatus);
         loadParcels()
             .then(parcels => this.setState({ parcels }));
     }
 
-    onSelectStatus = (status) => {
-        console.log(111);
-        this.setState({
-            selectedValue: status.value,
-        });
+    componentWillUnmount() {
+        this.historyUnlisten();
     }
+
+    updateStatus = (location) => {
+        const { status } = location.query;
+        if (status) {
+            this.setState({
+                selectedValue: status,
+            });
+        }
+    }
+
+    onSelectStatus = (status) => {
+        history.push({
+            pathname: location.pathname,
+            search: `?status=${status.value}`,
+        });
+    };
 
     render() {
         const parcels = this.state.selectedValue === '' ?
@@ -44,6 +62,7 @@ class ParcelsView extends BaseView {
                     <Select
                         onChange={this.onSelectStatus}
                         data={this.statuses}
+                        value={this.state.selectedValue}
                     />
                 </p>
                 <table className='table'>
