@@ -51,7 +51,9 @@ class ParcelsView extends BaseView {
     };
 
     onParcleClick = (parcel) => {
-        console.log(parcel);
+        history.push({
+            pathname: `/parcels/${parcel.id}`,
+        });
     };
 
     render() {
