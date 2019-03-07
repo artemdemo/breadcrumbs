@@ -19,13 +19,19 @@ class SingleParcelView extends BaseView {
     }
 
     render() {
-        if (!this.state.parcel) {
+        const { parcel } = this.state;
+        if (!parcel) {
             return null;
         }
 
         return (
             <React.Fragment>
-                Name: {this.state.parcel.name}
+                <p>
+                    Name: {parcel.name}
+                </p>
+                <p>
+                    Package: {parcel.package.name}
+                </p>
             </React.Fragment>
         );
     }
