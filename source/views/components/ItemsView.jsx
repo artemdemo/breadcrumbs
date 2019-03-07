@@ -58,13 +58,12 @@ class ItemsView extends BaseView {
 
         return (
             <React.Fragment>
-                <p>
-                    <Select
-                        onChange={this.onSelectStatus}
-                        data={this.colors}
-                    />
-                </p>
-
+                <Select
+                    className='mb-3'
+                    onChange={this.onSelectStatus}
+                    data={this.colors}
+                    value={this.state.selectedValue}
+                />
                 <table className='table'>
                     <thead>
                         <tr>

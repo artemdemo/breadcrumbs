@@ -50,6 +50,10 @@ class ParcelsView extends BaseView {
         });
     };
 
+    onParcleClick = (parcel) => {
+        console.log(parcel);
+    };
+
     render() {
         const parcels = this.state.selectedValue === 'all' ?
             this.state.parcels :
@@ -58,13 +62,12 @@ class ParcelsView extends BaseView {
             });
         return (
             <React.Fragment>
-                <p>
-                    <Select
-                        onChange={this.onSelectStatus}
-                        data={this.statuses}
-                        value={this.state.selectedValue}
-                    />
-                </p>
+                <Select
+                    className='mb-3'
+                    onChange={this.onSelectStatus}
+                    data={this.statuses}
+                    value={this.state.selectedValue}
+                />
                 <table className='table'>
                     <thead>
                         <tr>
@@ -75,7 +78,10 @@ class ParcelsView extends BaseView {
                     </thead>
                     <tbody>
                         {parcels.map(parcel => (
-                            <tr key={`parcel-${parcel.id}`}>
+                            <tr
+                                onClick={this.onParcleClick.bind(this, parcel)}
+                                key={`parcel-${parcel.id}`}
+                            >
                                 <td>{parcel.id}</td>
                                 <td>{parcel.name}</td>
                                 <td>{parcel.status}</td>
