@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import BaseView from './BaseView';
 import { loadParcel } from '../../model/parcels/parcelsReq';
 
@@ -30,7 +31,7 @@ class SingleParcelView extends BaseView {
                     Name: {parcel.name}
                 </p>
                 <p>
-                    Package: {parcel.package.name}
+                    Package: <Link to={`/packages/${parcel.package.id}`}>{parcel.package.name}</Link>
                 </p>
             </React.Fragment>
         );

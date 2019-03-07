@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView';
 import { loadPackages } from '../../model/packages/packagesReq';
+import history from '../../history';
 
 class PackagesView extends BaseView {
     constructor(props) {
@@ -16,6 +17,12 @@ class PackagesView extends BaseView {
             .then(packages => this.setState({ packages }));
     }
 
+    onPkgClick = (pkg) => {
+        history.push({
+            pathname: `/packages/${pkg.id}`,
+        });
+    };
+
     render() {
         return (
             <React.Fragment>
@@ -29,7 +36,10 @@ class PackagesView extends BaseView {
                     </thead>
                     <tbody>
                         {this.state.packages.map(pkg => (
-                            <tr key={`package-${pkg.id}`}>
+                            <tr
+                                onClick={this.onPkgClick.bind(this, pkg)}
+                                key={`package-${pkg.id}`}
+                            >
                                 <td>{pkg.id}</td>
                                 <td>{pkg.name}</td>
                                 <td>{pkg.items.length}</td>

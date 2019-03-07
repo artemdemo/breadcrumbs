@@ -19,13 +19,19 @@ class SingleItemView extends BaseView {
     }
 
     render() {
-        if (!this.state.item) {
+        const { item } = this.state;
+        if (!item) {
             return null;
         }
 
         return (
             <React.Fragment>
-                ID: {this.state.item.id}
+                <p>
+                    ID: {item.id}
+                </p>
+                <p>
+                    Color: {item.color}
+                </p>
             </React.Fragment>
         );
     }

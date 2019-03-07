@@ -49,6 +49,12 @@ class ItemsView extends BaseView {
         });
     };
 
+    onItemClick = (item) => {
+        history.push({
+            pathname: `/items/${item.id}`,
+        });
+    };
+
     render() {
         const items = this.state.selectedValue === 'all' ?
             this.state.items :
@@ -73,7 +79,10 @@ class ItemsView extends BaseView {
                     </thead>
                     <tbody>
                         {items.map(item => (
-                            <tr key={`item-${item.id}`}>
+                            <tr
+                                onClick={this.onItemClick.bind(this, item)}
+                                key={`item-${item.id}`}
+                            >
                                 <td>{item.id}</td>
                                 <td>{item.color}</td>
                             </tr>
