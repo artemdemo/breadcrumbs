@@ -1,8 +1,8 @@
 import React from 'react';
 import BaseView from './BaseView';
 import Select from '../../components/Select/Select';
-import history from '../../history';
 import { loadParcels } from '../../model/parcels/parcelsReq';
+import history from '../../history';
 
 class ParcelsView extends BaseView {
     constructor(props) {
@@ -10,11 +10,11 @@ class ParcelsView extends BaseView {
 
         this.state = {
             parcels: [],
-            selectedValue: '',
+            selectedValue: 'all',
         };
 
         this.statuses = [
-            {value: '', label: 'All'},
+            {value: 'all', label: 'All'},
             {value: 'delivered', label: 'Delivered'},
             {value: 'ready', label: 'Ready'},
             {value: 'draft', label: 'Draft'},
@@ -44,14 +44,14 @@ class ParcelsView extends BaseView {
     }
 
     onSelectStatus = (status) => {
-        history.push({
+        history.replace({
             pathname: location.pathname,
             search: `?status=${status.value}`,
         });
     };
 
     render() {
-        const parcels = this.state.selectedValue === '' ?
+        const parcels = this.state.selectedValue === 'all' ?
             this.state.parcels :
             this.state.parcels.filter((item) => {
                 return item.status === this.state.selectedValue;

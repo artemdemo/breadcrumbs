@@ -2,6 +2,7 @@ import React from 'react';
 import BaseView from './BaseView';
 import Select from '../../components/Select/Select';
 import { loadItems } from '../../model/items/itemsReq';
+import history from '../../history';
 
 class ItemsView extends BaseView {
     constructor(props) {
@@ -9,29 +10,47 @@ class ItemsView extends BaseView {
 
         this.state = {
             items: [],
-            selectedValue: '',
+            selectedValue: 'all',
         };
 
         this.colors = [
-            {value: '', label: 'All'},
+            {value: 'all', label: 'All'},
             {value: 'red', label: 'Red'},
             {value: 'blue', label: 'Blue'},
         ];
+
+        this.historyUnlisten = null;
     }
 
     componentDidMount() {
+        this.updateStatus(history.getCurrentLocation());
+        this.historyUnlisten = history.listen(this.updateStatus);
         loadItems()
             .then(items => this.setState({ items }));
     }
 
+    componentWillUnmount() {
+        this.historyUnlisten();
+    }
+
+    updateStatus = (location) => {
+        const { status } = location.query;
+        if (status) {
+            this.setState({
+                selectedValue: status,
+            });
+        }
+    }
+
     onSelectStatus = (status) => {
-        this.setState({
-            selectedValue: status.value,
+        history.replace({
+            pathname: location.pathname,
+            search: `?status=${status.value}`,
         });
     };
 
     render() {
-        const items = this.state.selectedValue === '' ?
+        const items = this.state.selectedValue === 'all' ?
             this.state.items :
             this.state.items.filter((item) => {
                 return item.color === this.state.selectedValue;
