@@ -3,6 +3,7 @@ import BaseView from './BaseView';
 import Select from '../../components/Select/Select';
 import { loadParcels } from '../../model/parcels/parcelsReq';
 import history from '../../history';
+import { historyPush } from '../../services/breadcrumbs';
 
 class ParcelsView extends BaseView {
     constructor(props) {
@@ -53,8 +54,9 @@ class ParcelsView extends BaseView {
     };
 
     onParcleClick = (parcel) => {
-        history.push({
+        historyPush({
             pathname: `/parcels/${parcel.id}`,
+            crumbName: `Parcels (${this.state.selectedValue})`,
         });
     };
 

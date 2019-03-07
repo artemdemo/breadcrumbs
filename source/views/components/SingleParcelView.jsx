@@ -29,7 +29,7 @@ class SingleParcelView extends BaseView {
 
         return (
             <React.Fragment>
-                <Breadcrumbs />
+                <Breadcrumbs current={{name: `Parcel: ${parcel.name}`}} />
                 <p>
                     Name: {parcel.name}
                 </p>

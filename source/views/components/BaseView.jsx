@@ -6,11 +6,11 @@ class BaseView extends React.PureComponent {
     }
 
     componentDidMount() {
-        console.log('did mount BaseView');
+        // console.log('did mount BaseView');
     }
 
     componentWillUnmount() {
-        console.log('will unmount BaseView');
+        // console.log('will unmount BaseView');
     }
 }
 

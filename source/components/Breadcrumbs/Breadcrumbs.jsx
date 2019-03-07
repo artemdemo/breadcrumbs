@@ -1,5 +1,8 @@
 import React from 'react';
-import history from '../../history';
+import _get from 'lodash/get';
+import { Link } from 'react-router';
+import PropTypes from 'prop-types';
+import { getCrumbs } from '../../services/breadcrumbs';
 
 class Breadcrumbs extends React.PureComponent {
     state = {
@@ -7,8 +10,23 @@ class Breadcrumbs extends React.PureComponent {
     };
 
     componentDidMount() {
-        const location = history.getCurrentLocation();
-        console.log(location);
+        const crumbs = getCrumbs();
+        this.setState({ crumbs });
+    }
+
+    renderLastCrumb() {
+        const name = _get(this.props, 'current.name');
+        if (name) {
+            return (
+                <li
+                    className='breadcrumb-item active'
+                    aria-current='page'
+                >
+                    {name}
+                </li>
+            );
+        }
+        return null;
     }
 
     render() {
@@ -22,13 +40,26 @@ class Breadcrumbs extends React.PureComponent {
                             className='breadcrumb-item'
                             key={`crumb-${index}`}
                         >
-                            {crumb.name}
+                            <Link to={crumb.p}>
+                                {crumb.n}
+                            </Link>
                         </li>
                     ))}
+                    {this.renderLastCrumb()}
                 </ol>
             </nav>
         );
     }
 }
+
+Breadcrumbs.propTypes = {
+    current: PropTypes.shape({
+        name: PropTypes.string,
+    }),
+};
+
+Breadcrumbs.defaultProps = {
+    current: null,
+};
 
 export default Breadcrumbs;

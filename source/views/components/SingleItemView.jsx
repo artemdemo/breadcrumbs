@@ -28,7 +28,7 @@ class SingleItemView extends BaseView {
 
         return (
             <React.Fragment>
-                <Breadcrumbs />
+                <Breadcrumbs current={{name: `Item: ${item.color}`}} />
                 <p>
                     ID: {item.id}
                 </p>
