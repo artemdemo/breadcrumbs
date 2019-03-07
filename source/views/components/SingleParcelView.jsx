@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadParcel } from '../../model/parcels/parcelsReq';
+import { historyPush } from '../../services/breadcrumbs';
 
 class SingleParcelView extends BaseView {
     constructor(props) {
@@ -21,6 +22,15 @@ class SingleParcelView extends BaseView {
             .then(parcel => this.setState({ parcel }));
     }
 
+    onLinkClick = (e) => {
+        e.preventDefault();
+        const { parcel } = this.state;
+        historyPush({
+            pathname: `/packages/${parcel.package.id}`,
+            crumbName: `Parcel (${parcel.name})`,
+        });
+    }
+
     render() {
         const { parcel } = this.state;
         if (!parcel) {
@@ -34,7 +44,13 @@ class SingleParcelView extends BaseView {
                     Name: {parcel.name}
                 </p>
                 <p>
-                    Package: <Link to={`/packages/${parcel.package.id}`}>{parcel.package.name}</Link>
+                    Package:
+                    <Link
+                        onClick={this.onLinkClick}
+                        to={`/packages/${parcel.package.id}`}
+                    >
+                        {parcel.package.name}
+                    </Link>
                 </p>
             </React.Fragment>
         );

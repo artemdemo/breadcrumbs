@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadPackage } from '../../model/packages/packagesReq';
+import { historyPush } from '../../services/breadcrumbs';
 
 class SinglePackageView extends BaseView {
     constructor(props) {
@@ -21,6 +22,14 @@ class SinglePackageView extends BaseView {
             .then(pkg => this.setState({ pkg }));
     }
 
+    onItemClick = (item, e) => {
+        e.preventDefault();
+        historyPush({
+            pathname: `/items/${item.id}`,
+            crumbName: `Item (${item.color})`,
+        });
+    }
+
     render() {
         const { pkg } = this.state;
         if (!pkg) {
@@ -29,7 +38,7 @@ class SinglePackageView extends BaseView {
 
         return (
             <React.Fragment>
-                <Breadcrumbs />
+                <Breadcrumbs current={{name: `Package: ${pkg.name}`}} />
                 <p>
                     Name: {pkg.name}
                 </p>
@@ -39,7 +48,12 @@ class SinglePackageView extends BaseView {
                 <ul>
                     {pkg.items.map(item => (
                         <li key={`pkg-item-${item.id}`}>
-                            <Link to={`/items/${item.id}`}>{item.color}</Link>
+                            <Link
+                                onClick={this.onItemClick.bind(this, item)}
+                                to={`/items/${item.id}`}
+                            >
+                                {item.color}
+                            </Link>
                         </li>
                     ))}
                 </ul>
