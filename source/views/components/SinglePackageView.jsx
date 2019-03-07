@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import BaseView from './BaseView';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadPackage } from '../../model/packages/packagesReq';
 
 class SinglePackageView extends BaseView {
@@ -13,6 +14,7 @@ class SinglePackageView extends BaseView {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         const { packageId } = this.props.params;
 
         loadPackage(packageId)
@@ -27,6 +29,7 @@ class SinglePackageView extends BaseView {
 
         return (
             <React.Fragment>
+                <Breadcrumbs />
                 <p>
                     Name: {pkg.name}
                 </p>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import BaseView from './BaseView';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadParcel } from '../../model/parcels/parcelsReq';
 
 class SingleParcelView extends BaseView {
@@ -13,6 +14,7 @@ class SingleParcelView extends BaseView {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         const { parcelId } = this.props.params;
 
         loadParcel(parcelId)
@@ -27,6 +29,7 @@ class SingleParcelView extends BaseView {
 
         return (
             <React.Fragment>
+                <Breadcrumbs />
                 <p>
                     Name: {parcel.name}
                 </p>

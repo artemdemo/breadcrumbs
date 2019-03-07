@@ -13,6 +13,7 @@ class PackagesView extends BaseView {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         loadPackages()
             .then(packages => this.setState({ packages }));
     }

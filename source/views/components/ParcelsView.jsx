@@ -24,6 +24,7 @@ class ParcelsView extends BaseView {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         this.updateStatus(history.getCurrentLocation());
         this.historyUnlisten = history.listen(this.updateStatus);
         loadParcels()
@@ -31,6 +32,7 @@ class ParcelsView extends BaseView {
     }
 
     componentWillUnmount() {
+        super.componentWillUnmount();
         this.historyUnlisten();
     }
 

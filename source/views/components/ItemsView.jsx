@@ -23,6 +23,7 @@ class ItemsView extends BaseView {
     }
 
     componentDidMount() {
+        super.componentDidMount();
         this.updateStatus(history.getCurrentLocation());
         this.historyUnlisten = history.listen(this.updateStatus);
         loadItems()
@@ -30,6 +31,7 @@ class ItemsView extends BaseView {
     }
 
     componentWillUnmount() {
+        super.componentWillUnmount();
         this.historyUnlisten();
     }
 
@@ -64,6 +66,7 @@ class ItemsView extends BaseView {
 
         return (
             <React.Fragment>
+
                 <Select
                     className='mb-3'
                     onChange={this.onSelectStatus}
