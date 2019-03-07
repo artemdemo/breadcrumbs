@@ -3,7 +3,8 @@
         "id": "1",
         "name": "parcel #01",
         "package": {
-            "id": "a1"
+            "id": "a1",
+            "name": "package #a1"
         },
         "status": "delivered"
     },
@@ -11,7 +12,8 @@
         "id": "2",
         "name": "parcel #02",
         "package": {
-            "id": "a2"
+            "id": "a2",
+            "name": "package #a2"
         },
         "status": "ready"
     },
@@ -19,7 +21,8 @@
         "id": "3",
         "name": "parcel #03",
         "package": {
-            "id": "a3"
+            "id": "a3",
+            "name": "package #a3"
         },
         "status": "draft"
     }
