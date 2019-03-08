@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView';
+import Tr from '../../components/Table/Tr';
 import { loadPackages } from '../../model/packages/packagesReq';
 import history from '../../history';
 
@@ -37,14 +38,14 @@ class PackagesView extends BaseView {
                     </thead>
                     <tbody>
                         {this.state.packages.map(pkg => (
-                            <tr
+                            <Tr
                                 onClick={this.onPkgClick.bind(this, pkg)}
                                 key={`package-${pkg.id}`}
                             >
                                 <td>{pkg.id}</td>
                                 <td>{pkg.name}</td>
                                 <td>{pkg.items.length}</td>
-                            </tr>
+                            </Tr>
                         ))}
                     </tbody>
                 </table>

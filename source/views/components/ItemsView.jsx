@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView';
+import Tr from '../../components/Table/Tr';
 import Select from '../../components/Select/Select';
 import { loadItems } from '../../model/items/itemsReq';
 import history from '../../history';
@@ -82,13 +83,13 @@ class ItemsView extends BaseView {
                     </thead>
                     <tbody>
                         {items.map(item => (
-                            <tr
+                            <Tr
                                 onClick={this.onItemClick.bind(this, item)}
                                 key={`item-${item.id}`}
                             >
                                 <td>{item.id}</td>
                                 <td>{item.color}</td>
-                            </tr>
+                            </Tr>
                         ))}
                     </tbody>
                 </table>

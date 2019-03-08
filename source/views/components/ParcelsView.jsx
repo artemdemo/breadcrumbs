@@ -1,5 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView';
+import Tr from '../../components/Table/Tr';
 import Select from '../../components/Select/Select';
 import { loadParcels } from '../../model/parcels/parcelsReq';
 import history from '../../history';
@@ -84,14 +85,14 @@ class ParcelsView extends BaseView {
                     </thead>
                     <tbody>
                         {parcels.map(parcel => (
-                            <tr
+                            <Tr
                                 onClick={this.onParcleClick.bind(this, parcel)}
                                 key={`parcel-${parcel.id}`}
                             >
                                 <td>{parcel.id}</td>
                                 <td>{parcel.name}</td>
                                 <td>{parcel.status}</td>
-                            </tr>
+                            </Tr>
                         ))}
                     </tbody>
                 </table>
