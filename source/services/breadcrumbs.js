@@ -1,18 +1,23 @@
 import _get from 'lodash/get';
+import _isString from 'lodash/isString';
 import history from '../history';
 
 const breadCrumbsSequence = [
     {
         path: /\/parcels$/,
+        defaultName: 'Parcels',
     },
     {
         path: /\/parcels\/[^/\s]+$/,
+        defaultName: 'Single parcel',
     },
     {
         path: /\/packages\/[^/\s]+$/,
+        // defaultName: 'Single package',
     },
     {
         path: /\/items\/[^/\s]+$/,
+        defaultName: 'Single item',
     },
 ];
 
@@ -55,7 +60,19 @@ export const historyPush = (data) => {
     const nextCrumb = {
         p: location.pathname + location.search,
     };
-    nextCrumb.n = data.currentCrumbName;
+    // If user provided crumb name we'll use it.
+    if (_isString(data.currentCrumbName) && data.currentCrumbName !== '') {
+        nextCrumb.n = data.currentCrumbName;
+    } else {
+        const pathObj = breadCrumbsSequence.find(item => item.path.test(location.pathname));
+        // If there is no name we'll use default name
+        if (pathObj && pathObj.defaultName) {
+            nextCrumb.n = pathObj.defaultName;
+        } else if (pathObj) {
+            // If there is no default name we'll use pathname
+            nextCrumb.n = location.pathname;
+        }
+    }
     crumbs.push(nextCrumb);
     const str = JSON.stringify(crumbs);
     history.push({

@@ -37,7 +37,8 @@ class SingleParcelView extends BaseView {
         e.preventDefault();
         historyPush({
             pathname: this.getPackagePath(),
-            currentCrumbName: this.getCurrentCrumbName(),
+            // I'm not providing here name in order to use deault functionality
+            // currentCrumbName: this.getCurrentCrumbName(),
         });
     }
 

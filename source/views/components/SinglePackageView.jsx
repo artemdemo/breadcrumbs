@@ -36,7 +36,8 @@ class SinglePackageView extends BaseView {
         e.preventDefault();
         historyPush({
             pathname: SinglePackageView.getItemPath(item),
-            currentCrumbName: this.getCurrentCrumbName(),
+            // I'm not providing here name in order to use deault functionality
+            // currentCrumbName: this.getCurrentCrumbName(),
         });
     }
 
