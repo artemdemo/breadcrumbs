@@ -33,11 +33,6 @@ const decodeCrumbs = (str) => {
     return atob(decodeURI(str));
 };
 
-export const hasCrumb = (path) => {
-    const pathObj = breadCrumbsSequence.find(item => item.path.test(path));
-    return !!pathObj;
-};
-
 export const getCrumbs = () => {
     const location = history.getCurrentLocation();
     const queryData = _get(location, `query.${QUERY_CRUMB_PROP}`);
