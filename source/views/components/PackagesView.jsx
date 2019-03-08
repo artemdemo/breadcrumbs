@@ -4,6 +4,7 @@ import Tr from '../../components/Table/Tr';
 import Table from '../../components/Table/Table';
 import { loadPackages } from '../../model/packages/packagesReq';
 import history from '../../history';
+import { historyPush } from '../../services/breadcrumbs';
 
 class PackagesView extends BaseView {
     constructor(props) {
@@ -21,8 +22,9 @@ class PackagesView extends BaseView {
     }
 
     onPkgClick = (pkg) => {
-        history.push({
+        historyPush({
             pathname: `/packages/${pkg.id}`,
+            currentCrumbName: 'Packages',
         });
     };
 

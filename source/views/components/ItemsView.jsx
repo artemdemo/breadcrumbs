@@ -5,6 +5,7 @@ import Table from '../../components/Table/Table';
 import Select from '../../components/Select/Select';
 import { loadItems } from '../../model/items/itemsReq';
 import history from '../../history';
+import { historyPush } from '../../services/breadcrumbs';
 
 class ItemsView extends BaseView {
     constructor(props) {
@@ -54,8 +55,9 @@ class ItemsView extends BaseView {
     };
 
     onItemClick = (item) => {
-        history.push({
+        historyPush({
             pathname: `/items/${item.id}`,
+            currentCrumbName: `Items (${this.state.selectedValue})`,
         });
     };
 
