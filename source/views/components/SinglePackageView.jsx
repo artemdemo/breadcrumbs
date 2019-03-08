@@ -26,7 +26,7 @@ class SinglePackageView extends BaseView {
         e.preventDefault();
         historyPush({
             pathname: `/items/${item.id}`,
-            crumbName: `Item (${item.color})`,
+            currentCrumbName: `Item (${item.color})`,
         });
     }
 

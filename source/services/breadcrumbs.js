@@ -16,23 +16,25 @@ const breadCrumbsSequence = [
     },
 ];
 
+const QUERY_CRUMB_PROP = 'c';
+
+const encodeCrumbs = (crumbs) => {
+    return encodeURI(btoa(crumbs));
+};
+
+const decodeCrumbs = (str) => {
+    return atob(decodeURI(str));
+};
+
 export const hasCrumb = (path) => {
     const pathObj = breadCrumbsSequence.find(item => item.path.test(path));
     return !!pathObj;
 };
 
-export const encodeCrumbs = (crumbs) => {
-    return encodeURI(btoa(crumbs));
-};
-
-export const decodeCrumbs = (str) => {
-    return atob(decodeURI(str));
-};
-
 export const getCrumbs = () => {
     const location = history.getCurrentLocation();
-    const c = _get(location, 'query.c');
-    const decodedStr = c && decodeCrumbs(c);
+    const queryData = _get(location, `query.${QUERY_CRUMB_PROP}`);
+    const decodedStr = queryData && decodeCrumbs(queryData);
     let crumbs = null;
     try {
         crumbs = JSON.parse(decodedStr);
@@ -45,18 +47,19 @@ export const getCrumbs = () => {
 /*
  * @param data {object}
  * @param data.pathname {string}
- * @param data.crumbName {string}
+ * @param data.currentCrumbName {string}
  */
 export const historyPush = (data) => {
     const location = history.getCurrentLocation();
     const crumbs = getCrumbs();
-    crumbs.push({
+    const nextCrumb = {
         p: location.pathname + location.search,
-        n: data.crumbName,
-    });
+    };
+    nextCrumb.n = data.currentCrumbName;
+    crumbs.push(nextCrumb);
     const str = JSON.stringify(crumbs);
     history.push({
         pathname: data.pathname,
-        search: `?c=${encodeCrumbs(str)}`,
+        search: `?${QUERY_CRUMB_PROP}=${encodeCrumbs(str)}`,
     });
 };

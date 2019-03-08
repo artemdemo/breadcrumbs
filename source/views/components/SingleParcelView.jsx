@@ -27,7 +27,7 @@ class SingleParcelView extends BaseView {
         const { parcel } = this.state;
         historyPush({
             pathname: `/packages/${parcel.package.id}`,
-            crumbName: `Parcel (${parcel.name})`,
+            currentCrumbName: `Parcel (${parcel.name})`,
         });
     }
 

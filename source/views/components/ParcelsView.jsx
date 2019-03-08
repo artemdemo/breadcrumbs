@@ -56,7 +56,7 @@ class ParcelsView extends BaseView {
     onParcleClick = (parcel) => {
         historyPush({
             pathname: `/parcels/${parcel.id}`,
-            crumbName: `Parcels (${this.state.selectedValue})`,
+            currentCrumbName: `Parcels (${this.state.selectedValue})`,
         });
     };
 
