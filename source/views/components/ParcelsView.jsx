@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
 import Table from '../../components/Table/Table';
 import Select from '../../components/Select/Select';
@@ -7,7 +6,7 @@ import { loadParcels } from '../../model/parcels/parcelsReq';
 import history from '../../history';
 import { historyPush } from '../../services/breadcrumbs';
 
-class ParcelsView extends BaseView {
+class ParcelsView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -27,7 +26,6 @@ class ParcelsView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         this.updateStatus(history.getCurrentLocation());
         this.historyUnlisten = history.listen(this.updateStatus);
         loadParcels()
@@ -35,17 +33,7 @@ class ParcelsView extends BaseView {
     }
 
     componentWillUnmount() {
-        super.componentWillUnmount();
         this.historyUnlisten();
-    }
-
-    updateStatus = (location) => {
-        const { status } = location.query;
-        if (status) {
-            this.setState({
-                selectedValue: status,
-            });
-        }
     }
 
     onSelectStatus = (status) => {
@@ -61,6 +49,15 @@ class ParcelsView extends BaseView {
             currentCrumbName: `Parcels (${this.state.selectedValue})`,
         });
     };
+
+    updateStatus = (location) => {
+        const { status } = location.query;
+        if (status) {
+            this.setState({
+                selectedValue: status,
+            });
+        }
+    }
 
     render() {
         const parcels = this.state.selectedValue === 'all' ?

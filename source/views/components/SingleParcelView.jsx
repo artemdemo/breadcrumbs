@@ -1,12 +1,11 @@
 import React from 'react';
 import _get from 'lodash/get';
 import { Link } from 'react-router';
-import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadParcel } from '../../model/parcels/parcelsReq';
 import { historyPush } from '../../services/breadcrumbs';
 
-class SingleParcelView extends BaseView {
+class SingleParcelView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -16,21 +15,10 @@ class SingleParcelView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         const { parcelId } = this.props.params;
 
         loadParcel(parcelId)
             .then(parcel => this.setState({ parcel }));
-    }
-
-    getPackagePath() {
-        const id = _get(this.state, 'parcel.package.id');
-        return `/packages/${id}`;
-    }
-
-    getCurrentCrumbName() {
-        const name = _get(this.state, 'parcel.name');
-        return name;
     }
 
     onLinkClick = (e) => {
@@ -40,6 +28,16 @@ class SingleParcelView extends BaseView {
             // I'm not providing here name in order to use deault functionality
             // currentCrumbName: this.getCurrentCrumbName(),
         });
+    }
+
+    getCurrentCrumbName() {
+        const name = _get(this.state, 'parcel.name');
+        return name;
+    }
+
+    getPackagePath() {
+        const id = _get(this.state, 'parcel.package.id');
+        return `/packages/${id}`;
     }
 
     render() {

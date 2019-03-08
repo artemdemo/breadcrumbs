@@ -1,5 +1,4 @@
 import React from 'react';
-import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
 import Table from '../../components/Table/Table';
 import Select from '../../components/Select/Select';
@@ -7,7 +6,7 @@ import { loadItems } from '../../model/items/itemsReq';
 import history from '../../history';
 import { historyPush } from '../../services/breadcrumbs';
 
-class ItemsView extends BaseView {
+class ItemsView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -26,7 +25,6 @@ class ItemsView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         this.updateStatus(history.getCurrentLocation());
         this.historyUnlisten = history.listen(this.updateStatus);
         loadItems()
@@ -34,17 +32,7 @@ class ItemsView extends BaseView {
     }
 
     componentWillUnmount() {
-        super.componentWillUnmount();
         this.historyUnlisten();
-    }
-
-    updateStatus = (location) => {
-        const { status } = location.query;
-        if (status) {
-            this.setState({
-                selectedValue: status,
-            });
-        }
     }
 
     onSelectStatus = (status) => {
@@ -60,6 +48,15 @@ class ItemsView extends BaseView {
             currentCrumbName: `Items (${this.state.selectedValue})`,
         });
     };
+
+    updateStatus = (location) => {
+        const { status } = location.query;
+        if (status) {
+            this.setState({
+                selectedValue: status,
+            });
+        }
+    }
 
     render() {
         const items = this.state.selectedValue === 'all' ?

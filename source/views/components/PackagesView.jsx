@@ -1,12 +1,10 @@
 import React from 'react';
-import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
 import Table from '../../components/Table/Table';
 import { loadPackages } from '../../model/packages/packagesReq';
-import history from '../../history';
 import { historyPush } from '../../services/breadcrumbs';
 
-class PackagesView extends BaseView {
+class PackagesView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -16,7 +14,6 @@ class PackagesView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         loadPackages()
             .then(packages => this.setState({ packages }));
     }

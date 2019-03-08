@@ -1,9 +1,8 @@
 import React from 'react';
-import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadItem } from '../../model/items/itemsReq';
 
-class SingleItemView extends BaseView {
+class SingleItemView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -13,7 +12,6 @@ class SingleItemView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         const { itemId } = this.props.params;
 
         loadItem(itemId)

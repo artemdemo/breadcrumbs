@@ -1,16 +1,11 @@
 import React from 'react';
 import _get from 'lodash/get';
 import { Link } from 'react-router';
-import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { loadPackage } from '../../model/packages/packagesReq';
 import { historyPush } from '../../services/breadcrumbs';
 
-class SinglePackageView extends BaseView {
-    static getItemPath(item) {
-        return `/items/${item.id}`;
-    }
-
+class SinglePackageView extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -20,16 +15,10 @@ class SinglePackageView extends BaseView {
     }
 
     componentDidMount() {
-        super.componentDidMount();
         const { packageId } = this.props.params;
 
         loadPackage(packageId)
             .then(pkg => this.setState({ pkg }));
-    }
-
-    getCurrentCrumbName() {
-        const name = _get(this.state, 'pkg.name');
-        return name;
     }
 
     onItemClick = (item, e) => {
@@ -39,6 +28,15 @@ class SinglePackageView extends BaseView {
             // I'm not providing here name in order to use deault functionality
             // currentCrumbName: this.getCurrentCrumbName(),
         });
+    }
+
+    getCurrentCrumbName() {
+        const name = _get(this.state, 'pkg.name');
+        return name;
+    }
+
+    static getItemPath(item) {
+        return `/items/${item.id}`;
     }
 
     render() {
