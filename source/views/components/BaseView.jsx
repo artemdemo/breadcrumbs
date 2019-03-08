@@ -1,10 +1,6 @@
 import React from 'react';
 
 class BaseView extends React.PureComponent {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         // console.log('did mount BaseView');
     }

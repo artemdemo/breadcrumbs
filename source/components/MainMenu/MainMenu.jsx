@@ -8,7 +8,6 @@ const MainMenu = () => {
             <li><Link to='/parcels'>Parcels page</Link></li>
             <li><Link to='/packages'>Packages page</Link></li>
             <li><Link to='/items'>Items page</Link></li>
-            <li><Link to='/secondary'>Secondary page</Link></li>
         </ul>
     );
 };

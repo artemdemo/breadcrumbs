@@ -32,6 +32,10 @@ class Breadcrumbs extends React.PureComponent {
     render() {
         const { crumbs } = this.state;
 
+        if (crumbs.length === 0) {
+            return null;
+        }
+
         return (
             <nav aria-label='breadcrumb'>
                 <ol className='breadcrumb'>

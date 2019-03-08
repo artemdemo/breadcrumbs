@@ -1,4 +1,5 @@
 import React from 'react';
+import _get from 'lodash/get';
 import { Link } from 'react-router';
 import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -22,12 +23,21 @@ class SingleParcelView extends BaseView {
             .then(parcel => this.setState({ parcel }));
     }
 
+    getPackagePath() {
+        const id = _get(this.state, 'parcel.package.id');
+        return `/packages/${id}`;
+    }
+
+    getCurrentCrumbName() {
+        const name = _get(this.state, 'parcel.name');
+        return name;
+    }
+
     onLinkClick = (e) => {
         e.preventDefault();
-        const { parcel } = this.state;
         historyPush({
-            pathname: `/packages/${parcel.package.id}`,
-            currentCrumbName: `Parcel (${parcel.name})`,
+            pathname: this.getPackagePath(),
+            currentCrumbName: this.getCurrentCrumbName(),
         });
     }
 
@@ -39,7 +49,7 @@ class SingleParcelView extends BaseView {
 
         return (
             <React.Fragment>
-                <Breadcrumbs current={{name: `Parcel: ${parcel.name}`}} />
+                <Breadcrumbs current={{name: this.getCurrentCrumbName()}} />
                 <p>
                     Name: {parcel.name}
                 </p>
@@ -47,7 +57,7 @@ class SingleParcelView extends BaseView {
                     Package:
                     <Link
                         onClick={this.onLinkClick}
-                        to={`/packages/${parcel.package.id}`}
+                        to={this.getPackagePath()}
                     >
                         {parcel.package.name}
                     </Link>

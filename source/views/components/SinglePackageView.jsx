@@ -1,4 +1,5 @@
 import React from 'react';
+import _get from 'lodash/get';
 import { Link } from 'react-router';
 import BaseView from './BaseView';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -6,6 +7,10 @@ import { loadPackage } from '../../model/packages/packagesReq';
 import { historyPush } from '../../services/breadcrumbs';
 
 class SinglePackageView extends BaseView {
+    static getItemPath(item) {
+        return `/items/${item.id}`;
+    }
+
     constructor(props) {
         super(props);
 
@@ -22,11 +27,16 @@ class SinglePackageView extends BaseView {
             .then(pkg => this.setState({ pkg }));
     }
 
+    getCurrentCrumbName() {
+        const name = _get(this.state, 'pkg.name');
+        return name;
+    }
+
     onItemClick = (item, e) => {
         e.preventDefault();
         historyPush({
-            pathname: `/items/${item.id}`,
-            currentCrumbName: `Item (${item.color})`,
+            pathname: SinglePackageView.getItemPath(item),
+            currentCrumbName: this.getCurrentCrumbName(),
         });
     }
 
@@ -38,7 +48,7 @@ class SinglePackageView extends BaseView {
 
         return (
             <React.Fragment>
-                <Breadcrumbs current={{name: `Package: ${pkg.name}`}} />
+                <Breadcrumbs current={{name: this.getCurrentCrumbName()}} />
                 <p>
                     Name: {pkg.name}
                 </p>
@@ -50,7 +60,7 @@ class SinglePackageView extends BaseView {
                         <li key={`pkg-item-${item.id}`}>
                             <Link
                                 onClick={this.onItemClick.bind(this, item)}
-                                to={`/items/${item.id}`}
+                                to={SinglePackageView.getItemPath(item)}
                             >
                                 {item.color}
                             </Link>
