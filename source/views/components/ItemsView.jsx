@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
+import Table from '../../components/Table/Table';
 import Select from '../../components/Select/Select';
 import { loadItems } from '../../model/items/itemsReq';
 import history from '../../history';
@@ -74,7 +75,7 @@ class ItemsView extends BaseView {
                     data={this.colors}
                     value={this.state.selectedValue}
                 />
-                <table className='table'>
+                <Table>
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -92,7 +93,7 @@ class ItemsView extends BaseView {
                             </Tr>
                         ))}
                     </tbody>
-                </table>
+                </Table>
             </React.Fragment>
         );
     }

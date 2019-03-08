@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
+import Table from '../../components/Table/Table';
 import Select from '../../components/Select/Select';
 import { loadParcels } from '../../model/parcels/parcelsReq';
 import history from '../../history';
@@ -75,7 +76,7 @@ class ParcelsView extends BaseView {
                     data={this.statuses}
                     value={this.state.selectedValue}
                 />
-                <table className='table'>
+                <Table>
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -95,7 +96,7 @@ class ParcelsView extends BaseView {
                             </Tr>
                         ))}
                     </tbody>
-                </table>
+                </Table>
             </React.Fragment>
         );
     }

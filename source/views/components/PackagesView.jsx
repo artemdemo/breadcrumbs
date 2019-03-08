@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView';
 import Tr from '../../components/Table/Tr';
+import Table from '../../components/Table/Table';
 import { loadPackages } from '../../model/packages/packagesReq';
 import history from '../../history';
 
@@ -28,7 +29,7 @@ class PackagesView extends BaseView {
     render() {
         return (
             <React.Fragment>
-                <table className='table'>
+                <Table>
                     <thead>
                         <tr>
                             <th scope='col'>ID</th>
@@ -48,7 +49,7 @@ class PackagesView extends BaseView {
                             </Tr>
                         ))}
                     </tbody>
-                </table>
+                </Table>
             </React.Fragment>
         );
     }
