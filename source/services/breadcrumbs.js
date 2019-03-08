@@ -13,6 +13,8 @@ const breadCrumbsSequence = [
     },
     {
         path: /\/packages\/[^/\s]+$/,
+        // Here I'm desibling default name in order to test what will be shown instead
+        // (should be path)
         // defaultName: 'Single package',
     },
     {
