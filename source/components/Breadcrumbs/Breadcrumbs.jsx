@@ -15,7 +15,7 @@ class Breadcrumbs extends React.PureComponent {
     }
 
     renderLastCrumb() {
-        const name = _get(this.props, 'current.name');
+        const name = _get(this.props.current, 'name');
         if (name) {
             return (
                 <li
