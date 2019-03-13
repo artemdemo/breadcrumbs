@@ -13,8 +13,8 @@ const breadCrumbsSequence = [
     },
     {
         path: /\/packages\/[^/\s]+$/,
-        // Here I'm desibling default name in order to test what will be shown instead
-        // (should be path)
+        // Here I'm disabling default name in order to test what will be shown instead
+        // (should be a path)
         // defaultName: 'Single package',
     },
     {
@@ -57,7 +57,7 @@ export const historyPush = (data) => {
     const nextCrumb = {
         p: location.pathname + location.search,
     };
-    // If user provided crumb name we'll use it.
+    // If user provided crumb name we'll use it
     if (_isString(data.currentCrumbName) && data.currentCrumbName !== '') {
         nextCrumb.n = data.currentCrumbName;
     } else {
