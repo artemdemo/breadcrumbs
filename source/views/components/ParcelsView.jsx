@@ -43,7 +43,7 @@ class ParcelsView extends React.PureComponent {
         });
     };
 
-    onParcleClick = (parcel) => {
+    onParcelClick = (parcel) => {
         historyPush({
             pathname: `/parcels/${parcel.id}`,
             currentCrumbName: `Parcels (${this.state.selectedValue})`,
@@ -57,7 +57,7 @@ class ParcelsView extends React.PureComponent {
                 selectedValue: status,
             });
         }
-    }
+    };
 
     render() {
         const parcels = this.state.selectedValue === 'all' ?
@@ -84,7 +84,7 @@ class ParcelsView extends React.PureComponent {
                     <tbody>
                         {parcels.map(parcel => (
                             <Tr
-                                onClick={this.onParcleClick.bind(this, parcel)}
+                                onClick={this.onParcelClick.bind(this, parcel)}
                                 key={`parcel-${parcel.id}`}
                             >
                                 <td>{parcel.id}</td>
