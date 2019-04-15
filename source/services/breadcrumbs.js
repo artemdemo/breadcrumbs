@@ -1,5 +1,7 @@
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
+import _omit from 'lodash/omit';
+import queryString from 'query-string';
 import history from '../history';
 
 const breadCrumbsSequence = [
@@ -23,13 +25,13 @@ const breadCrumbsSequence = [
     },
 ];
 
-const QUERY_CRUMB_PROP = 'c';
+export const QUERY_CRUMB_PROP = 'c';
 
-const encodeCrumbs = (crumbs) => {
+export const encodeCrumbs = (crumbs) => {
     return encodeURI(btoa(crumbs));
 };
 
-const decodeCrumbs = (str) => {
+export const decodeCrumbs = (str) => {
     return atob(decodeURI(str));
 };
 
@@ -54,8 +56,9 @@ export const getCrumbs = () => {
 export const historyPush = (data) => {
     const location = history.getCurrentLocation();
     const crumbs = getCrumbs();
+    const search = queryString.stringify(_omit(location.query, [QUERY_CRUMB_PROP]));
     const nextCrumb = {
-        p: location.pathname + location.search,
+        p: location.pathname + (search !== '' ? `?${search}` : ''),
     };
     // If user provided crumb name we'll use it
     if (_isString(data.currentCrumbName) && data.currentCrumbName !== '') {

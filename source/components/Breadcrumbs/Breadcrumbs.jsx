@@ -2,6 +2,7 @@ import React from 'react';
 import _get from 'lodash/get';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
+import Crumb from './Crumb';
 import { getCrumbs } from '../../services/breadcrumbs';
 
 class Breadcrumbs extends React.PureComponent {
@@ -36,6 +37,8 @@ class Breadcrumbs extends React.PureComponent {
             return null;
         }
 
+        console.log(crumbs);
+
         return (
             <nav aria-label='breadcrumb'>
                 <ol className='breadcrumb'>
@@ -44,9 +47,7 @@ class Breadcrumbs extends React.PureComponent {
                             className='breadcrumb-item'
                             key={`crumb-${index}`}
                         >
-                            <Link to={crumb.p}>
-                                {crumb.n}
-                            </Link>
+                            <Crumb crumb={crumb} />
                         </li>
                     ))}
                     {this.renderLastCrumb()}
